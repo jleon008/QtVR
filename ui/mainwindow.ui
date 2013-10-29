@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1079</width>
+    <width>1100</width>
     <height>836</height>
    </rect>
   </property>
@@ -42,14 +42,14 @@
       <property name="handleWidth">
        <number>5</number>
       </property>
-      <widget class="QFrame" name="frame_2">
+      <widget class="QFrame" name="mainFrame">
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_6" stretch="1,0,0">
+       <layout class="QVBoxLayout" name="verticalLayout_6" stretch="0,0,0">
         <property name="spacing">
          <number>0</number>
         </property>
@@ -66,11 +66,11 @@
          <number>2</number>
         </property>
         <item>
-         <widget class="QTabWidget" name="tabWidget">
+         <widget class="QTabWidget" name="viewTabWidget">
           <property name="currentIndex">
            <number>0</number>
           </property>
-          <widget class="QWidget" name="tab">
+          <widget class="QWidget" name="renderedViewTab">
            <attribute name="title">
             <string>3d View</string>
            </attribute>
@@ -87,7 +87,7 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_2">
+          <widget class="QWidget" name="plotViewTab">
            <attribute name="title">
             <string>Graphs</string>
            </attribute>
@@ -110,7 +110,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QFrame" name="frame">
+         <widget class="QFrame" name="interactionFrame">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
@@ -469,354 +469,769 @@
             </widget>
            </item>
            <item>
-            <widget class="QGroupBox" name="markerGroupBox">
-             <property name="title">
-              <string>Marker Data</string>
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <property name="spacing">
+              <number>2</number>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout">
-              <property name="spacing">
-               <number>2</number>
-              </property>
-              <property name="leftMargin">
-               <number>2</number>
-              </property>
-              <property name="topMargin">
-               <number>2</number>
-              </property>
-              <property name="rightMargin">
-               <number>2</number>
-              </property>
-              <property name="bottomMargin">
-               <number>2</number>
-              </property>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_2">
-                <item>
-                 <widget class="QLabel" name="label_4">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>55</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>Marker File</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLineEdit" name="markerFileLineEdit">
-                  <property name="enabled">
-                   <bool>false</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QToolButton" name="selectFileToolButton">
-                  <property name="toolTip">
-                   <string>Load a new file of marker data</string>
-                  </property>
-                  <property name="text">
-                   <string>...</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_4">
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_3">
-                  <item>
-                   <widget class="QLabel" name="label_5">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>65</width>
-                      <height>0</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>Frame Count</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLineEdit" name="frameCountLineEdit">
-                    <property name="enabled">
-                     <bool>false</bool>
-                    </property>
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>0</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string/>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_5">
-                  <item>
-                   <widget class="QLabel" name="label_6">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>65</width>
-                      <height>0</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>Marker Count</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLineEdit" name="markerCountLineEdit">
-                    <property name="enabled">
-                     <bool>false</bool>
-                    </property>
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>30</width>
-                      <height>0</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_9">
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_7">
-                  <item>
-                   <spacer name="horizontalSpacer_5">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="label_7">
-                    <property name="text">
-                     <string>Start</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QSpinBox" name="markerFrameStartBox"/>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_10">
-                  <item>
-                   <spacer name="horizontalSpacer_6">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="label_8">
-                    <property name="text">
-                     <string>Step</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QSpinBox" name="dataStepBox">
-                    <property name="toolTip">
-                     <string>Frames per step</string>
-                    </property>
-                    <property name="minimum">
-                     <number>-16</number>
-                    </property>
-                    <property name="maximum">
-                     <number>16</number>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_6">
-                  <item>
-                   <spacer name="horizontalSpacer_7">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="label_9">
-                    <property name="text">
-                     <string>Stop</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QSpinBox" name="markerFrameStopBox"/>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_8">
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_11">
-                  <item>
-                   <widget class="QLabel" name="label_10">
-                    <property name="text">
-                     <string>Current Frame</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QSpinBox" name="dataFrameBox">
-                    <property name="toolTip">
-                     <string>Current frame in the marker data</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_8">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="markerLoopCheckBox">
-                  <property name="text">
-                   <string>Loop</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout">
-                <item>
-                 <spacer name="horizontalSpacer_13">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="QToolButton" name="playPauseDataButton">
-                  <property name="text">
-                   <string>Play/Pause Data</string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../resources.qrc">
-                    <normaloff>:/icons/data/media-playback-start-3.png</normaloff>:/icons/data/media-playback-start-3.png</iconset>
-                  </property>
-                  <property name="checkable">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QToolButton" name="stepDataButton">
-                  <property name="toolTip">
-                   <string>Step Sim</string>
-                  </property>
-                  <property name="text">
-                   <string>Step Sim</string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../resources.qrc">
-                    <normaloff>:/icons/data/media-step-right-3.png</normaloff>:/icons/data/media-step-right-3.png</iconset>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_14">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </widget>
+             <item>
+              <widget class="QTabWidget" name="dataTabWidget">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="currentIndex">
+                <number>0</number>
+               </property>
+               <widget class="QWidget" name="markerTab">
+                <attribute name="title">
+                 <string>Marker Data</string>
+                </attribute>
+                <layout class="QVBoxLayout" name="verticalLayout_8">
+                 <property name="spacing">
+                  <number>2</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>2</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>2</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>2</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>2</number>
+                 </property>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_2">
+                   <item>
+                    <widget class="QLabel" name="label_4">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>55</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Marker File</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="markerFileLineEdit">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QToolButton" name="selectFileToolButton">
+                     <property name="toolTip">
+                      <string>Load a new file of marker data</string>
+                     </property>
+                     <property name="text">
+                      <string>...</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_4">
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_3">
+                     <item>
+                      <widget class="QLabel" name="label_5">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>65</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>Frame Count</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLineEdit" name="frameCountLineEdit">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>30</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_5">
+                     <item>
+                      <widget class="QLabel" name="label_6">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>65</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>Marker Count</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLineEdit" name="markerCountLineEdit">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>30</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_9">
+                   <property name="spacing">
+                    <number>2</number>
+                   </property>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_7">
+                     <item>
+                      <spacer name="horizontalSpacer_5">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_7">
+                       <property name="text">
+                        <string>Start</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QSpinBox" name="markerFrameStartBox"/>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_10">
+                     <item>
+                      <spacer name="horizontalSpacer_6">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_8">
+                       <property name="text">
+                        <string>Step</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QSpinBox" name="dataStepBox">
+                       <property name="toolTip">
+                        <string>Frames per step</string>
+                       </property>
+                       <property name="minimum">
+                        <number>-16</number>
+                       </property>
+                       <property name="maximum">
+                        <number>16</number>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_6">
+                     <item>
+                      <spacer name="horizontalSpacer_7">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_9">
+                       <property name="text">
+                        <string>Stop</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QSpinBox" name="markerFrameStopBox"/>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_8">
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_11">
+                     <item>
+                      <widget class="QLabel" name="label_10">
+                       <property name="text">
+                        <string>Current Frame</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QSpinBox" name="dataFrameBox">
+                       <property name="toolTip">
+                        <string>Current frame in the marker data</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_8">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QCheckBox" name="markerLoopCheckBox">
+                     <property name="text">
+                      <string>Loop</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="angleTab">
+                <attribute name="title">
+                 <string>Angle Data</string>
+                </attribute>
+                <layout class="QVBoxLayout" name="verticalLayout_10">
+                 <property name="spacing">
+                  <number>2</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>2</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>2</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>2</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>2</number>
+                 </property>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_25">
+                   <item>
+                    <widget class="QPushButton" name="loadAnglesButton">
+                     <property name="toolTip">
+                      <string>Load a sequence of generalized coordinates from file.</string>
+                     </property>
+                     <property name="text">
+                      <string>Load</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="saveAnglesButton">
+                     <property name="toolTip">
+                      <string>Write the current generalized coordinates to file.</string>
+                     </property>
+                     <property name="text">
+                      <string>Save</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="clearAnglesButton">
+                     <property name="toolTip">
+                      <string>Clear the recorded joint angle sequence.</string>
+                     </property>
+                     <property name="text">
+                      <string>Clear</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_21">
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_22">
+                     <item>
+                      <widget class="QLabel" name="label_12">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>65</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>Frame Count</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLineEdit" name="angleFrameCountLineEdit">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>30</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="toolTip">
+                        <string>How many frames have been recorded.</string>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_23">
+                     <item>
+                      <widget class="QLabel" name="label_13">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>65</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>DoF Count</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLineEdit" name="angleDofCountLineEdit">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>30</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="toolTip">
+                        <string>How many degrees of freedom are being recorded.</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_24">
+                   <item>
+                    <widget class="QLabel" name="label_14">
+                     <property name="text">
+                      <string>Current Frame</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QSpinBox" name="angleDataFrameBox">
+                     <property name="toolTip">
+                      <string>Current frame in the joint angle data.</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QCheckBox" name="recordingAnglesCheckBox">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="text">
+                      <string>Recording</string>
+                     </property>
+                     <property name="checked">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="torqueTab">
+                <attribute name="title">
+                 <string>Torque Data</string>
+                </attribute>
+                <layout class="QVBoxLayout" name="verticalLayout_11">
+                 <property name="spacing">
+                  <number>2</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>2</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>2</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>2</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>2</number>
+                 </property>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_26">
+                   <item>
+                    <widget class="QPushButton" name="loadTorquesButton">
+                     <property name="toolTip">
+                      <string>Load a sequence of generalized coordinates from file.</string>
+                     </property>
+                     <property name="text">
+                      <string>Load</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="saveTorquesButton">
+                     <property name="toolTip">
+                      <string>Write the current generalized coordinates to file.</string>
+                     </property>
+                     <property name="text">
+                      <string>Save</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="clearTorquesButton">
+                     <property name="toolTip">
+                      <string>Clear the recorded joint angle sequence.</string>
+                     </property>
+                     <property name="text">
+                      <string>Clear</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_27">
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_28">
+                     <item>
+                      <widget class="QLabel" name="label_15">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>65</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>Frame Count</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLineEdit" name="torqueFrameCountLineEdit">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>30</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="toolTip">
+                        <string>How many frames have been recorded.</string>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_29">
+                     <item>
+                      <widget class="QLabel" name="label_16">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>65</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>DoF Count</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLineEdit" name="torqueDofCountLineEdit">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>30</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="toolTip">
+                        <string>How many degrees of freedom are being recorded.</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_30">
+                   <item>
+                    <widget class="QLabel" name="label_17">
+                     <property name="text">
+                      <string>Current Frame</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QSpinBox" name="torqueDataFrameBox">
+                     <property name="toolTip">
+                      <string>Current frame in the joint angle data.</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_2">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QCheckBox" name="recordingTorquesCheckBox">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="text">
+                      <string>Recording</string>
+                     </property>
+                     <property name="checked">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <spacer name="horizontalSpacer_13">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QToolButton" name="playPauseDataButton">
+                 <property name="text">
+                  <string>Play/Pause Data</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../resources.qrc">
+                   <normaloff>:/icons/data/media-playback-start-3.png</normaloff>:/icons/data/media-playback-start-3.png</iconset>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="stepDataButton">
+                 <property name="toolTip">
+                  <string>Step Sim</string>
+                 </property>
+                 <property name="text">
+                  <string>Step Sim</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../resources.qrc">
+                   <normaloff>:/icons/data/media-step-right-3.png</normaloff>:/icons/data/media-step-right-3.png</iconset>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_14">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
            </item>
            <item>
             <widget class="QToolButton" name="playAllButton">
@@ -872,7 +1287,7 @@
           <zorder>groupBox_3</zorder>
           <zorder>playAllButton</zorder>
           <zorder>simulationGroupBox</zorder>
-          <zorder>markerGroupBox</zorder>
+          <zorder></zorder>
          </widget>
         </item>
        </layout>
@@ -906,7 +1321,7 @@
          <item>
           <widget class="QPushButton" name="clearPlotButton">
            <property name="text">
-            <string>Clear Saved Angles</string>
+            <string>Clear Angles/Torques</string>
            </property>
           </widget>
          </item>
@@ -989,7 +1404,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1079</width>
+     <width>1100</width>
      <height>21</height>
     </rect>
    </property>
@@ -999,7 +1414,14 @@
     </property>
     <addaction name="actionExit"/>
    </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
    <addaction name="menu_File"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -1041,6 +1463,16 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionOveview">
+   <property name="text">
+    <string>Oveview</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
    </property>
   </action>
  </widget>

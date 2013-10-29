@@ -170,10 +170,9 @@ void Sequence::updatePaths(DataFrame* frame)
 
 void Sequence::appendFrame(DataFrame* frame)
 {
-  //if (data.empty()) createPaths(frame);
-  //else updatePaths(frame);
   data.push_back(frame);
-
+  int s = size();
+  emit lengthChanged(s);
 }
 
 DataFrame* Sequence::getFrame(int frame)
@@ -190,6 +189,7 @@ void Sequence::clear()
   data.clear();
   if (paths) delete[] paths;
   paths=0;
+  emit lengthChanged(0);
 }
 
 
@@ -205,12 +205,12 @@ void Sequence::toFile(QString filename)
   if (!file.open(QFile::WriteOnly | QIODevice::Truncate | QIODevice::Text)) return;
   QTextStream out(&file);
 
-  for (int kk=0;kk<xx;++kk) {
-    for (int ii=0;ii<row_index;++ii) {
-      for (int jj=0;jj<column_index;++jj) {
+  for (int kk=0;kk<xx;++kk) { // For each frame
+    for (int ii=0;ii<row_index;++ii) { // For each joint
+      for (int jj=0;jj<column_index;++jj) { // For each DoF
         out << data[kk]->getData(ii,jj) << " ";
       }
     }
-    out << "\n";
+    out << "\n"; // New line after each frame.
   }
 }

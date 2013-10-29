@@ -90,9 +90,13 @@ public:
 /**
   Three dimensional data:
   1st dimension -> time
-  2nd dimension -> degrees of freedom
+  2nd dimension -> degrees of freedom (joints)
   3rd dimension -> axes of the degree of freedom
 
+  We don't do anything to enforce
+  consistent data from frame-to-frame;
+  so each frame might have a different
+  number of rows or columns.
   */
 class Sequence : public QObject
 {
@@ -113,6 +117,7 @@ public:
   void toFile(QString filename);
 
 signals:
+  void lengthChanged(int);
 
 public slots:
   void clear();

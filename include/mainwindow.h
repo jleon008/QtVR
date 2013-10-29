@@ -124,6 +124,24 @@ public slots:
 
   void markerFileDialog();
 
+  void aboutSlot();
+
+  // Handle interactions with recorded angle data
+  void setAngleDofs(int dofs);
+  void setAngleFrameCount(int frames);
+  void setAngleCurrentFrame(int frame);
+  void clearSavedAngles();
+  void loadSavedAngles();
+  void writeSavedAngles();
+
+  // Handle interactions with recorded torque data
+  void setTorqueDofs(int dofs);
+  void setTorqueFrameCount(int frames);
+  void setTorqueCurrentFrame(int frame);
+  void clearSavedTorques();
+  void loadSavedTorques();
+  void writeSavedTorques();
+
 
 public:
     Ui::MainWindow *ui;  ///< Holds the widgets created in the designer

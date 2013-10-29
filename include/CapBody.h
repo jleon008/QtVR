@@ -304,6 +304,8 @@ public:
   void zeroControl();
   void restoreControl();
 
+  int dofCount();
+
 signals:
   void markMap(int mark,int bodyID);
   void markPoint(int mark,double px,double py,double pz);

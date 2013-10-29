@@ -111,6 +111,10 @@ signals:
   /// and the character model.  We should make
   /// this less convoluted.
   void useMarkers(bool);
+  /// Announce which angle frame we're using
+  void angleFrame(int);
+  /// Announce which torque frame we're using
+  void torqueFrame(int);
 
 public slots:
 
@@ -118,6 +122,7 @@ public slots:
   void step();  ///< Advance the physical simulation forward in time
   void pauseSim(bool);
   void setSingleStep();
+
 
   void setGroundFriction(double friction);
   void setTerrainSoftness(double terrain);
@@ -132,6 +137,9 @@ public slots:
 
   /// Open the specified file and write out recorded kinematics
   void anglesToFile(QString filename);
+
+  void setAngleFrame(int frame);
+  void setTorqueFrame(int frame);
 
 
 
@@ -181,7 +189,8 @@ protected:
 
   bool self_collide;  ///< Should the body collide with itself
   int follow_sequence_source_state;   ///< Are we following markers, joint angles, or torques?
-  int sequence_frame;      ///< What frame are we on as we move through an angle or torque sequence
+  int angle_sequence_frame;      ///< What frame are we on as we move through an angle sequence
+  int torque_sequence_frame;     ///< What frame are we on when replaying torques?
 
   FILE* main_file;    ///< Kludge file handle for writing out whatever data is interesting at the moment
 

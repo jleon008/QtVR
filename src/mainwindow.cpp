@@ -219,6 +219,24 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->dataFrameBox,SIGNAL(valueChanged(int)),this,SLOT(setDataFrame(int)));
   connect(ui->timeSlider,SIGNAL(valueChanged(int)),ui->dataFrameBox,SLOT(setValue(int)));
 
+  connect(ui->actionAbout,SIGNAL(triggered()),this,SLOT(aboutSlot()));
+
+  // Monitor and manipulate recorded angle data
+  connect(world->angle_sequence,SIGNAL(lengthChanged(int)),this,SLOT(setAngleFrameCount(int)));
+  connect(ui->angleDataFrameBox,SIGNAL(valueChanged(int)),this,SLOT(setAngleCurrentFrame(int)));
+  connect(world,SIGNAL(angleFrame(int)),this,SLOT(setAngleCurrentFrame(int)));
+  connect(ui->saveAnglesButton,SIGNAL(clicked()),this,SLOT(writeSavedAngles()));
+  connect(ui->loadAnglesButton,SIGNAL(clicked()),this,SLOT(loadSavedAngles()));
+  connect(ui->clearAnglesButton,SIGNAL(clicked()),this,SLOT(clearSavedAngles()));
+
+  // Monitor and manipulate recorded torque data
+  connect(world->torque_sequence,SIGNAL(lengthChanged(int)),this,SLOT(setTorqueFrameCount(int)));
+  connect(ui->torqueDataFrameBox,SIGNAL(valueChanged(int)),this,SLOT(setTorqueCurrentFrame(int)));
+  connect(world,SIGNAL(torqueFrame(int)),this,SLOT(setTorqueCurrentFrame(int)));
+  connect(ui->saveTorquesButton,SIGNAL(clicked()),this,SLOT(writeSavedTorques()));
+  connect(ui->loadTorquesButton,SIGNAL(clicked()),this,SLOT(loadSavedTorques()));
+  connect(ui->clearTorquesButton,SIGNAL(clicked()),this,SLOT(clearSavedTorques()));
+
   // *****
   // Need to dynamically change this
   ui->timeSlider->setRange(0,world->getMarkerData()->size()-1);
@@ -360,6 +378,9 @@ void MainWindow::populateJointTab(CapBody* capBody,
   makeJointWidget("L.AnkleY",CapBody::L_ANKLE_JOINT,1,capBody,layout);
 
   makeJointWidget("L.Foot",CapBody::L_FOOT_JOINT,0,capBody,layout);
+
+  this->setAngleDofs(capBody->dofCount());
+  this->setTorqueDofs(capBody->dofCount());
 }
 
 void MainWindow::makeBodyWidget(QString label,int body,
@@ -667,6 +688,7 @@ void MainWindow::useAngles(bool toggle)
   if (toggle) {
     ui->glWidget->getWorld()->follow(1);
   }
+  ui->recordingTorquesCheckBox->setChecked(toggle);
 }
 
 void MainWindow::useMarkers(bool toggle)
@@ -675,6 +697,7 @@ void MainWindow::useMarkers(bool toggle)
     ui->glWidget->getWorld()->follow(0);
     lightForces();
   }
+  ui->recordingAnglesCheckBox->setChecked(toggle);
 }
 
 void MainWindow::useTorques(bool toggle)
@@ -820,3 +843,123 @@ void MainWindow::markerFileDialog()
   loadMarkerFile(filename);
 
 }
+
+void MainWindow::aboutSlot()
+{
+  QMessageBox::about(this,"About QtVR",
+                     "This project uses physics simulation to\n"
+                     "fit a character model pose to motion capture\n"
+                     "marker data (IK) by representing markers as\n"
+                     "points of infinite mass and then connecting\n"
+                     "those points to a character model with ball\n"
+                     "joints.  The physics engine (ODE) models the\n"
+                     "joint constraints as stiff, implicit springs\n"
+                     "and computes the forces necessary to pull the\n"
+                     "model into place.\n"
+                     "The resultant joint angles (generalized\n"
+                     "coordinates) can be recorded and then applied\n"
+                     "as internal constraints on the model.  ODE\n"
+                     "then computes appropriate joint torques to\n"
+                     "drive the model toward the target generalized\n"
+                     "coordinates, approximately solving the inverse\n"
+                     "dynamics (ID) problem on a frame-by-frame basis.\n\n"
+                     "Orignally developed by Joseph Cooper, 2013."
+                     );
+}
+
+void MainWindow::setAngleDofs(int dofs)
+{
+  ui->angleDofCountLineEdit->setText(QString::number(dofs));
+}
+
+void MainWindow::setAngleFrameCount(int frames)
+{
+  ui->angleFrameCountLineEdit->setText(QString::number(frames));
+  ui->angleDataFrameBox->setMaximum(frames);
+}
+
+void MainWindow::setAngleCurrentFrame(int frame)
+{
+  ui->angleDataFrameBox->setValue(frame);
+  getWorld()->setAngleFrame(frame);
+}
+
+void MainWindow::clearSavedAngles()
+{
+  SimWorld* w = getWorld();
+  w->angle_sequence->clear();
+}
+
+void MainWindow::loadSavedAngles()
+{
+  QString filename = QFileDialog::getOpenFileName(this,"Load Angle Data");
+
+  if (!filename.isEmpty()) {
+    // Try to open and parse the file.
+    // If the data are valid, replace the
+    // world's angle_sequence.
+    // Otherwise report the error.
+  }
+
+
+}
+
+void MainWindow::writeSavedAngles()
+{
+  QString filename = QFileDialog::getSaveFileName(this,"Save Angle Data");
+
+  if (!filename.isEmpty()) {
+    SimWorld* w = getWorld();
+    w->anglesToFile(filename);
+    // TODO: Error check in case write failed.
+  }
+}
+
+void MainWindow::setTorqueDofs(int dofs)
+{
+  ui->torqueDofCountLineEdit->setText(QString::number(dofs));
+}
+
+void MainWindow::setTorqueFrameCount(int frames)
+{
+  ui->torqueFrameCountLineEdit->setText(QString::number(frames));
+  ui->torqueDataFrameBox->setMaximum(frames);
+}
+
+void MainWindow::setTorqueCurrentFrame(int frame)
+{
+  ui->torqueDataFrameBox->setValue(frame);
+  getWorld()->setTorqueFrame(frame);
+}
+
+void MainWindow::clearSavedTorques()
+{
+  SimWorld* w = getWorld();
+  w->torque_sequence->clear();
+}
+
+void MainWindow::loadSavedTorques()
+{
+  QString filename = QFileDialog::getOpenFileName(this,"Load Torque Data");
+
+  if (!filename.isEmpty()) {
+    // Try to open and parse the file.
+    // If the data are valid, replace the
+    // world's angle_sequence.
+    // Otherwise report the error.
+  }
+
+
+}
+
+void MainWindow::writeSavedTorques()
+{
+  QString filename = QFileDialog::getSaveFileName(this,"Save Torque Data");
+
+  if (!filename.isEmpty()) {
+    SimWorld* w = getWorld();
+    w->torque_sequence->toFile(filename);
+    // TODO: Error check in case write failed.
+  }
+}
+

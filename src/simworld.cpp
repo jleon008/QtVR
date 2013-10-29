@@ -138,9 +138,6 @@ void SimWorld::collideGeoms(void* data,dGeomID object_1_ID,dGeomID object_2_ID)
        (object_1_ID==world_object->body->geometries[CapBody::LUP_ARM_BODY])||
        (object_2_ID==world_object->body->geometries[CapBody::LUP_ARM_BODY]))) return;
 
-
-
-
   contact[0].surface.mode = dContactSoftCFM | ((body_1&&body_2)?0:dContactApprox1); //Surfaces are just a little squishy
   contact[0].surface.soft_cfm = (body_1&&body_2)?0.001:world_object->ground_squish; //
   contact[0].surface.bounce_vel = 0.01;
@@ -183,17 +180,18 @@ void SimWorld::collideGeoms(void* data,dGeomID object_1_ID,dGeomID object_2_ID)
 void SimWorld::updateSeqFrame()
 {
   if (follow_sequence_source_state==1 || follow_sequence_source_state==3) {
-    body->setTargetFrame(angle_sequence->getFrame(sequence_frame));
-    sequence_frame+=1;
+    body->setTargetFrame(angle_sequence->getFrame(angle_sequence_frame));
+    angle_sequence_frame+=1;
+    emit angleFrame(angle_sequence_frame);
   }
   if (follow_sequence_source_state==2) {
 
-    DataFrame* frame = torque_sequence->getFrame(sequence_frame);
+    DataFrame* frame = torque_sequence->getFrame(torque_sequence_frame);
     if (frame) {
       applyTorquesToBody(frame);
-      sequence_frame+=1;
+      torque_sequence_frame+=1;
+      emit torqueFrame(torque_sequence_frame);
     }
-
   }
 }
 
@@ -603,24 +601,27 @@ void SimWorld::follow(int type)
   case 0:
     // Follow markers
     emit useMarkers(true);
-
     break;
   case 1:
     // Follow angles
+      // DEPRECATED.
+      // Replaced by "mode 3"
     emit useMarkers(false);
-    sequence_frame = 0;
-
+    angle_sequence_frame = 0;
+    emit angleFrame(angle_sequence_frame);
     break;
   case 2:
     // Follow torques
     emit useMarkers(false);
-    sequence_frame = 0;
+    torque_sequence_frame = 0;
+    emit torqueFrame(torque_sequence_frame);
     break;
   case 3:
     // Instead of blindly following torques generated as a sequence
     // We find and then apply the torques.
     emit useMarkers(false);
-    sequence_frame = 0;
+    angle_sequence_frame = 0;
+    emit angleFrame(angle_sequence_frame);
 
     break;
   default:
@@ -638,6 +639,29 @@ void SimWorld::setSelfCollide(bool hit_self)
 void SimWorld::anglesToFile(QString filename)
 {
   angle_sequence->toFile(filename);
+}
+
+void SimWorld::setAngleFrame(int frame)
+{
+
+  if ((frame!=angle_sequence_frame) &&
+      (frame>=0) &&
+      (frame<=angle_sequence->size()))
+  {
+    angle_sequence_frame=frame;
+    emit angleFrame(frame);
+  }
+}
+
+void SimWorld::setTorqueFrame(int frame)
+{
+  if ((frame!=torque_sequence_frame) &&
+      (frame>=0) &&
+      (frame<=torque_sequence->size()))
+  {
+    torque_sequence_frame=frame;
+    emit torqueFrame(frame);
+  }
 }
 
 

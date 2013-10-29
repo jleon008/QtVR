@@ -2001,5 +2001,32 @@ void CapBody::restoreControl()
   }
 }
 
+/**
+ * @brief CapBody::dofCount Dimensionality of generalized degrees of freedom of model
+ * @return
+ */
+int CapBody::dofCount()
+{
+  int tot=0;
+  for (int jj=0;jj<JOINT_COUNT;++jj) {
+    switch (dJointGetType(joints[jj])) {
+      case dJointTypeHinge:
+        tot+=1;
+      break;
+      case dJointTypeUniversal:
+        tot+=2;
+      break;
+      case dJointTypeAMotor:
+      case dJointTypeLMotor:
+      case dJointTypeBall:
+        tot+=3;
+      break;
+      default:
+        // Uh oh.
+      break;
+    }
+  }
+  return tot;
+}
 
 
