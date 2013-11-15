@@ -41,6 +41,7 @@
 #include "boarddata.h"
 #include "dsboxwithparams.h"
 #include "testscript.h"
+#include "csvmarkerdata.h"
 
 
 /**
@@ -78,7 +79,9 @@ MainWindow::MainWindow(QWidget *parent) :
   // belong as a child to the graphics widget.
   SimWorld* world = ui->glWidget->getWorld();
   CapBody* capBody = world->getBody();
-#if defined( BOARD_DATA )
+#if defined( CSV_DATA)
+  CSVMarkerData* md = world->getMarkerData();
+#elif defined( BOARD_DATA )
   BoardMarkerData* md = ui->glWidget->getWorld()->getMarkerData();
 #elif defined( POKE_DATA )
   PokeMarkerData* md = ui->glWidget->getWorld()->getMarkerData();
@@ -494,7 +497,12 @@ void MainWindow::playPauseSim(bool play)
 
 void MainWindow::playPauseData(bool play)
 {
+#if defined( CSV_DATA)
+  CSVMarkerData* markerData = ui->glWidget->getWorld()->getMarkerData();
+#else
   MarkerData* markerData = ui->glWidget->getWorld()->getMarkerData();
+#endif
+
   if (markerData->isPaused() != play) return;
   markerData->setPaused(!play);
 
@@ -504,7 +512,11 @@ void MainWindow::playPauseData(bool play)
 void MainWindow::updatePlayButtons()
 {
   SimWorld* world = ui->glWidget->getWorld();
+#if defined( CSV_DATA)
+  CSVMarkerData* markerData = world->getMarkerData();
+#else
   MarkerData* markerData = world->getMarkerData();
+#endif
 
   if (world->isPaused()) {
     ui->playPauseSimButton->setIcon(QIcon(":/icons/data/media-playback-start-3.png"));
@@ -569,8 +581,9 @@ void MainWindow::stepAll()
 void MainWindow::setDataFrame(int frame)
 {
   //LiveMarkerData* md = ui->glWidget->getWorld()->getMarkerData();
-
-#if defined( BOARD_DATA )
+#if defined( CSV_DATA )
+    CSVMarkerData* md = ui->glWidget->getWorld()->getMarkerData();
+#elif defined( BOARD_DATA )
   BoardMarkerData* md = ui->glWidget->getWorld()->getMarkerData();
 #elif defined( POKE_DATA )
   PokeMarkerData* md = ui->glWidget->getWorld()->getMarkerData();
@@ -588,7 +601,9 @@ void MainWindow::setDataFrame(int frame)
 void MainWindow::setDataStep(int stepSize)
 {
   //LiveMarkerData* md = ui->glWidget->getWorld()->getMarkerData();
-#if defined( BOARD_DATA )
+#if defined( CSV_DATA)
+  CSVMarkerData* md = ui->glWidget->getWorld()->getMarkerData();
+#elif defined( BOARD_DATA )
   BoardMarkerData* md = ui->glWidget->getWorld()->getMarkerData();
 #elif defined( POKE_DATA )
   PokeMarkerData* md = ui->glWidget->getWorld()->getMarkerData();
@@ -624,7 +639,9 @@ void MainWindow::grabMarkPos(int mark)
   CapBody* body = ui->glWidget->getWorld()->getBody();
 
   //LiveMarkerData* md = ui->glWidget->getWorld()->getMarkerData();
-#if defined( BOARD_DATA )
+#if defined( CSV_DATA)
+  CSVMarkerData* md = ui->glWidget->getWorld()->getMarkerData();
+#elif defined( BOARD_DATA )
   BoardMarkerData* md = ui->glWidget->getWorld()->getMarkerData();
 #elif defined( POKE_DATA )
   PokeMarkerData* md = ui->glWidget->getWorld()->getMarkerData();

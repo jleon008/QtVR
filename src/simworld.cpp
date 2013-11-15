@@ -26,6 +26,7 @@
 #include "CapBody.h"
 
 #include "sequence.h"
+#include <iostream>
 
 SimWorld::SimWorld(QObject *parent) :
     QObject(parent)
@@ -61,7 +62,9 @@ SimWorld::SimWorld(QObject *parent) :
   //markData = new SwingData(world,markSpace,this);
   //markData = new LiveMarkerData(world,markSpace,this);
   std::cout << "[Simworld] Loading marker_data..." << std::endl;
-#if defined( BOARD_DATA )
+#if defined( CSV_DATA)
+  marker_data = new CSVMarkerData(world,marker_space,this);
+#elif defined( BOARD_DATA )
   markData = new BoardMarkerData(world,markSpace,this);
 #elif defined( POKE_DATA )
   markData = new PokeMarkerData(world,markSpace,this);

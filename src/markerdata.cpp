@@ -32,7 +32,7 @@ MarkerData::MarkerData(dWorldID world,dSpaceID space,QObject *parent) :
 {
   this->world=world;
   this->space=space;
-  data.loadFile("data/data.c3d");
+  data.loadFile("../QtVR/data/data.c3d");
   std::cout << "[markerdata] Marker file loaded...";
   marker_count = data.data.pointsPerFrame;
   std::cout << "  ...this file contains " << marker_count << " markers" << std::endl;

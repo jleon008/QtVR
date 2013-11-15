@@ -36,7 +36,9 @@
 
 //#include "swingdata.h"
 //#include "livemarkerdata.h"
-#if defined( BOARD_DATA )
+#if defined( CSV_DATA)
+#include "csvmarkerdata.h"
+#elif defined( BOARD_DATA )
 #include "boardmarkerdata.h"
 #elif defined( POKE_DATA )
 #include "pokemarkerdata.h"
@@ -76,7 +78,9 @@ public:
 
   //SwingData* getMarkerData() {return marker_data;}
   //LiveMarkerData* getMarkerData() {return marker_data;}
-#if defined( BOARD_DATA )
+#if defined( CSV_DATA)
+  CSVMarkerData* getMarkerData() {return marker_data;}
+#elif defined( BOARD_DATA )
   BoardMarkerData* getMarkerData() {return marker_data;}
 #elif defined( POKE_DATA )
   PokeMarkerData* getMarkerData() {return marker_data;}
@@ -175,7 +179,9 @@ protected:
     */
   //SwingData* markData;
   //LiveMarkerData* markData;
-#if defined( BOARD_DATA )
+#if defined( CSV_DATA)
+  CSVMarkerData* marker_data;
+#elif defined( BOARD_DATA )
   BoardMarkerData* marker_data;
 #elif defined( POKE_DATA )
   PokeMarkerData* marker_data;

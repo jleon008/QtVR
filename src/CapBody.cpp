@@ -1317,10 +1317,10 @@ void CapBody::restoreState()
  */
 void CapBody::loadBody()
 {
-  loadMarkToBodyMap("data/markMap.txt");
-  loadMarkRelPosMap("data/posMap.txt");
-  loadBodyProperties("data/dimMap.txt");
-  loadJointAnchors("data/anchorMap.txt");
+  loadMarkToBodyMap("../QtVR/data/markMap.txt");
+  loadMarkRelPosMap("../QtVR/data/posMap.txt");
+  loadBodyProperties("../QtVR/data/dimMap.txt");
+  loadJointAnchors("../QtVR/data/anchorMap.txt");
   copyToSim();
 }
 

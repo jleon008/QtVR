@@ -128,7 +128,10 @@ void ExperimentScript::updateScript()
       mainWin->saveModel();
     }
     if (frameCount>=10) {
+#if defined(CSV_DATA)
+#else
       mainWin->getWorld()->getMarkerData()->captureVirtualMarkers();
+#endif
     }
 
     if (frameCount>=271) {
@@ -153,9 +156,10 @@ void ExperimentScript::updateScript()
       mainWin->strongForces();
       mainWin->setDataFrame(50000);
       mainWin->restoreModel();
-
+#if defined(CSV_DATA)
+#else
       mainWin->getWorld()->getMarkerData()->useVirtualMarkers(true);
-
+#endif
       frameCount = 0;
       state = ExAnglePass;
     }
@@ -175,8 +179,10 @@ void ExperimentScript::updateScript()
       mainWin->zeroForces();
       mainWin->setDataFrame(50000);
       mainWin->restoreModel();
-
+#if defined(CSV_DATA)
+#else
       mainWin->getWorld()->getMarkerData()->useVirtualMarkers(true);
+#endif
 
       frameCount = 0;
       state = ExForcePass;
@@ -233,7 +239,10 @@ void ExperimentScript::resetTrial()
   }
 
   // Data are in milimeters
+#if defined(CSV_DATA)
+#else
   mainWin->getWorld()->getMarkerData()->perturbShadowFrame(noiseVal[condition]);
+#endif
   mainWin->playPauseData(false);
   mainWin->playPauseSim(false);
   mainWin->useMarkers(true);
@@ -241,8 +250,10 @@ void ExperimentScript::resetTrial()
   mainWin->setDataFrame(50000);
   mainWin->clearData();
   mainWin->restoreModel();
+#if defined(CSV_DATA)
+#else
   mainWin->getWorld()->getMarkerData()->useVirtualMarkers(true);
-
+#endif
   mainWin->playPauseData(true);
   mainWin->playPauseSim(true);
   // Each time through, we restore, reset markers, set noise level

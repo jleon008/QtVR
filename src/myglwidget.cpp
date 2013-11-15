@@ -32,6 +32,8 @@
 #include "simworld.h"
 #include "CapBody.h"
 #include "boarddata.h"
+#include "csvmarkerdata.h"
+#include <iostream>
 
 float MyGLWidget::light_pos[4] = {3, 2, 8, 1};
 float MyGLWidget::light_ambient[4] = {.3f,.3f,.3f,1};
@@ -1181,7 +1183,9 @@ void MyGLWidget::renderSimWorld(SimWorld* world)
   //SwingData* md = world->getMarkerData();
   //LiveMarkerData* md = world->getMarkerData();
   //PokeMarkerData* md = world->getMarkerData();
-#if defined( BOARD_DATA )
+#if defined( CSV_DATA )
+  CSVMarkerData* md = world->getMarkerData();
+#elif defined( BOARD_DATA )
   BoardMarkerData* md = world->getMarkerData();
 #elif defined( POKE_DATA )
   PokeMarkerData* md = world->getMarkerData();

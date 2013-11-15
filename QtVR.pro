@@ -40,7 +40,8 @@ SOURCES += \
     src/livemarkerdata.cpp \
     src/experimentscript.cpp \
     src/scriptbase.cpp \
-    src/testscript.cpp
+    src/testscript.cpp \
+    src/csvmarkerdata.cpp
 
 HEADERS += \
     include/mainwindow.h \
@@ -73,7 +74,8 @@ HEADERS += \
     include/experimentscript.h \
     include/scriptbase.h \
     include/testscript.h \
-    include/gaussrand.h
+    include/gaussrand.h \
+    include/csvmarkerdata.h
 
 FORMS += \
     ui/mainwindow.ui \
@@ -98,6 +100,10 @@ win32:DEFINES += _CRT_SECURE_NO_WARNINGS
 # If we've captured marker data and balance board data
 # simultaneously, we'll need BoardData instead of MarkerData
 #DEFINES += BOARD_DATA
+
+#If we've captured csv marker data, we'll need CSVDATA instead of
+#MarkerData
+DEFINES += CSV_DATA
 
 # Telling QT where the ODE code source is allows the creator
 # to provide more code completion and source help
